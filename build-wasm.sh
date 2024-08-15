@@ -1,7 +1,3 @@
-# raylib
-raylib...
-
-
 #!/bin/bash
 set -euo pipefail
 
@@ -42,20 +38,46 @@ emcc -o ../out/index.html \
 # Navigate to out directory
 cd ../out
 
-# Function to check if a command exists
-command_exists() {
-    command -v "$1" >/dev/null 2>&1
-}
+# Run the compiled output
+emrun index.html
 
-# Try to run the compiled output with an available browser
-if command_exists xdg-open; then
-    xdg-open index.html
-elif command_exists google-chrome; then
-    google-chrome index.html
-elif command_exists firefox; then
-    firefox index.html
-else
-    echo "No suitable browser found. Please open 'out/index.html' manually in your preferred web browser."
-fi
 
-echo "Build complete. Output files are in the 'out' directory."
+
+
+
+
+
+
+
+
+
+
+
+
+
+# #!/bin/bash
+# set -euo pipefail
+
+# cd ./emsdk
+# source emsdk_env.sh
+# cd ../
+# cd ./src
+
+# emcc -v -o ../out/index.html \
+#     main.c -Os -Wall main.c \
+#     -I. -I ../include \
+#     -L. -L ./lib \
+#     -s USE_GLFW=3 \
+#     -s ASYNCIFY \
+#     --shell-file ../shell.html \
+#     --preload-file resources \
+#     -s TOTAL_STACK=64MB \
+#     -s INITIAL_MEMORY=128MB \
+#     -s ASSERTIONS \
+#     -DPLATFORM_WEB
+
+# cd ../out
+# # BUILD_NAME="$(date -u +"%Y-%m-%d")"
+# # zip "${BUILD_NAME}.zip" index.html index.js index.wasm index.data
+
+# emrun index.html
